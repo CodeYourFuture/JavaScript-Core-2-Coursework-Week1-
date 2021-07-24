@@ -23,11 +23,14 @@
   NOTE: Only the location names should be returned, as strings.
 
   When you finish the exercise, think about how this solution is different to your last solution.
-  What's better about each approach?
+  What's better about each approach? This approach is less complicated and far quicker.
 */
 
-function journeyPlanner(locations, transportMode) {
+function journeyPlanner (locations, transportMode) {
+  const location = Object.keys(locations)
+  return location.filter(destination =>locations[destination].includes(transportMode))
   
+ 
 }
 
 /* ======= TESTS - DO NOT MODIFY ===== 
@@ -36,31 +39,31 @@ function journeyPlanner(locations, transportMode) {
 - (Reminder: You must have run `npm install` one time before this will work!)
 */
 const londonLocations = {
-    "Angel": ["tube", "bus"],
-    "London Bridge": ["tube", "river boat"],
-    "Tower Bridge": ["tube", "bus"],
-    "Greenwich": ["bus", "river boat"],
-};
+  Angel: ['tube', 'bus'],
+  'London Bridge': ['tube', 'river boat'],
+  'Tower Bridge': ['tube', 'bus'],
+  Greenwich: ['bus', 'river boat']
+}
 
-test("journeyPlanner function works - case 1", () => {
-  expect(journeyPlanner(londonLocations, "river boat")).toEqual([
-    "London Bridge",
-    "Greenwich",
-  ]);
-});
-
-test("journeyPlanner function works - case 2", () => {
-  expect(journeyPlanner(londonLocations, "bus")).toEqual([
-    "Angel",
-    "Tower Bridge",
-    "Greenwich",
-  ]);
-});
-
-test("journeyPlanner function works - case 3", () => {
-  expect(journeyPlanner(londonLocations, "tube")).toEqual([
-    "Angel",
-    "London Bridge",
-    "Tower Bridge",
+test('journeyPlanner function works - case 1', () => {
+  expect(journeyPlanner(londonLocations, 'river boat')).toEqual([
+    'London Bridge',
+    'Greenwich'
   ])
-});
+})
+
+test('journeyPlanner function works - case 2', () => {
+  expect(journeyPlanner(londonLocations, 'bus')).toEqual([
+    'Angel',
+    'Tower Bridge',
+    'Greenwich'
+  ])
+})
+
+test('journeyPlanner function works - case 3', () => {
+  expect(journeyPlanner(londonLocations, 'tube')).toEqual([
+    'Angel',
+    'London Bridge',
+    'Tower Bridge'
+  ])
+})

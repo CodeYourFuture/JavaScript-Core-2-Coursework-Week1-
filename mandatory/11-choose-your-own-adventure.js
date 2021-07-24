@@ -38,7 +38,8 @@ east? If there is a bug in your code, try to fix it.
 
 let game = {
   currentRoom: null,
-
+  //fixing bug
+  //added functionality to check if room available or not in a supplied direction
   start: function (roomName) {
     // This function is called with the name of the room that the player wants
     // to start in.
@@ -46,17 +47,30 @@ let game = {
     // object for the correct room.
     //
     // Hint: the only valid rooms are "hall", "classroom" and "library".
+
+    this.currentRoom = rooms[roomName]
+
+    // console.log(this.currentRoom);
   },
 
   move: function (direction) {
-    // This function is called with the direction that the player wants to move.
-    // Finish the function so that the currentRoom property is updated with new
-    // room in the direction that the player wants to move in.
-    //
-    // Hint: the room objects have north/east/south/west methods which return
-    // a new room object that is in the relevant direction.
-  },
-};
+    if (direction === 'east' && this.currentRoom.east())
+      this.currentRoom = this.currentRoom.east()
+    else if (direction === 'west' && this.currentRoom.west())
+      this.currentRoom = this.currentRoom.west()
+    else if (direction === 'north' && this.currentRoom.north())
+      this.currentRoom = this.currentRoom.north()
+    else if (direction === 'south' && this.currentRoom.south())
+      this.currentRoom = this.currentRoom.south()
+  }
+
+  // This function is called with the direction that the player wants to move.
+  // Finish the function so that the currentRoom property is updated with new
+  // room in the direction that the player wants to move in.
+  //
+  // Hint: the room objects have north/east/south/west methods which return
+  // a new room object that is in the relevant direction.
+}
 
 /*
 DO NOT EDIT BELOW THIS LINE
@@ -64,51 +78,51 @@ DO NOT EDIT BELOW THIS LINE
 
 let rooms = {
   hall: {
-    name: "hall",
+    name: 'hall',
     north: function () {
-      return null;
+      return null
     },
     east: function () {
-      return rooms.classroom;
+      return rooms.classroom
     },
     south: function () {
-      return rooms.library;
+      return rooms.library
     },
     west: function () {
-      return null;
-    },
+      return null
+    }
   },
   classroom: {
-    name: "classroom",
+    name: 'classroom',
     north: function () {
-      return null;
+      return null
     },
     east: function () {
-      return null;
+      return null
     },
     south: function () {
-      return null;
+      return null
     },
     west: function () {
-      return rooms.hall;
-    },
+      return rooms.hall
+    }
   },
   library: {
-    name: "library",
+    name: 'library',
     north: function () {
-      return rooms.hall;
+      return rooms.hall
     },
     east: function () {
-      return null;
+      return null
     },
     south: function () {
-      return null;
+      return null
     },
     west: function () {
-      return null;
-    },
-  },
-};
+      return null
+    }
+  }
+}
 
 /*
 YOU ARE NOT EXPECTED TO UNDERSTAND THE CODE BELOW THIS 
@@ -116,38 +130,38 @@ LINE!
 
 You only need to read it if you are interested in how it works.
 */
-const readline = require("readline");
+const readline = require('readline')
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout,
-});
+  output: process.stdout
+})
 
-function start() {
+function start () {
   rl.question(
-    "Which room would you like to start in? (hall/classroom/library) ",
+    'Which room would you like to start in? (hall/classroom/library) ',
     function (room) {
-      game.start(room);
-      console.log("\n---------------------\n");
-      play("start");
+      game.start(room)
+      console.log('\n---------------------\n')
+      play('start')
     }
-  );
+  )
 }
 
-function play(method) {
+function play (method) {
   if (!game.currentRoom && !game.currentRoom.name) {
     throw new Error(
       `It looks like the game isn't quite right! Make sure your \`${method}\` method is correct`
-    );
+    )
   }
-  console.log(`You are in the ${game.currentRoom.name}.\n`);
+  console.log(`You are in the ${game.currentRoom.name}.\n`)
   rl.question(
-    "Which direction would you like to move? (north/east/south/west) ",
+    'Which direction would you like to move? (north/east/south/west) ',
     function (direction) {
-      game.move(direction);
-      console.log("\n---------------------\n");
-      play("move");
+      game.move(direction)
+      console.log('\n---------------------\n')
+      play('move')
     }
-  );
+  )
 }
 
-start();
+start()

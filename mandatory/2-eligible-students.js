@@ -10,6 +10,7 @@
   Can you see how using objects leads to more clear code?
 
   -------------------------------------------------------------------------
+Yes, I've observed code gets organized easier to understand and gets precised.
 
   Only students who have attended enough classes are eligible to sit an exam.
 
@@ -19,8 +20,12 @@
   - Returns an array containing only the names of the who have attended AT LEAST 8 classes
  */
 
-function eligibleStudents(attendances) {
-   
+function eligibleStudents (attendances) {
+  let passingMarksThreshold = 8
+
+  return attendances
+    .filter(student=> student.attendance >= passingMarksThreshold)
+    .map(student => student.name)
 }
 
 /* ======= TESTS - DO NOT MODIFY ===== 
@@ -30,15 +35,19 @@ function eligibleStudents(attendances) {
 */
 
 const attendances = [
-    {name: "Ahmed", attendance: 8},
-    {name: "Clement", attendance: 10},
-    {name: "Elamin", attendance: 6},
-    {name: "Adam", attendance: 7},
-    {name: "Tayoa", attendance: 11},
-    {name: "Nina", attendance: 10},
-];
-  
-test("eligibleStudents function works", () => {
-    expect(eligibleStudents(attendances)).toEqual(["Ahmed", "Clement", "Tayoa", "Nina"]);
-});
- 
+  { name: 'Ahmed', attendance: 8 },
+  { name: 'Clement', attendance: 10 },
+  { name: 'Elamin', attendance: 6 },
+  { name: 'Adam', attendance: 7 },
+  { name: 'Tayoa', attendance: 11 },
+  { name: 'Nina', attendance: 10 }
+]
+
+test('eligibleStudents function works', () => {
+  expect(eligibleStudents(attendances)).toEqual([
+    'Ahmed',
+    'Clement',
+    'Tayoa',
+    'Nina'
+  ])
+})
