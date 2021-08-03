@@ -17,6 +17,9 @@ Should give return the answer of 62600.
 **/
 
 function getBudgets(peopleArray) {
+  return peopleArray
+    .map((obj) => Object.values(obj)[2])
+    .reduce((acc, curr) => acc + curr);
 }
 
 /* ======= TESTS - DO MODIFY (!!!) =====
@@ -25,8 +28,14 @@ function getBudgets(peopleArray) {
 - (Reminder: You must have run `npm install` one time before this will work!)
 */
 
+//Added array of objects, with budget value 0 for each object
 test("No Budgets", () => {
-  expect(getBudgets([])).toEqual(0);
+  expect(
+    getBudgets([
+      { name: "John", age: 21, budget: 0 },
+      { name: "Steve", age: 32, budget: 0 },
+      { name: "Martin", age: 16, budget: 0 },
+    ])).toEqual(0);
 }); 
 
 test("Test 1", () => {

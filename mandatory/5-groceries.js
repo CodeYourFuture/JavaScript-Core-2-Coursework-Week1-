@@ -28,14 +28,31 @@ Exercise 1:
   The weeklyGroceriesToBuy array shouldn't contain any repeating items.
 */
 // Gather all week item names into this array
-let weeklyGroceriesToBuy = [];
+
+//Gives====> Array [Array ["Cheese", "Eggs", "Tomato", "Paprika", "Leek"], Array ["Wrap", "Tuna", "Canned beans", "Cheese", "Carrot", "Aubergine"], Array ["Orange Juice", "Apple", "Ananas", "Black tea"], Array ["Lamb", "Salt", "Bulgur", "Potato"], Array ["Rice milk", "Blueberries", "Porridge", "Banana", "Cinnamon"], Array ["Olive oil", "Potato", "Salmon", "Asparagus"]]
+let allItems = [
+  Object.values(weeklyMealPlan.monday),
+  Object.values(weeklyMealPlan.tuesday),
+  Object.values(weeklyMealPlan.wednesday),
+  Object.values(weeklyMealPlan.thursday),
+  Object.values(weeklyMealPlan.friday),
+  Object.values(weeklyMealPlan.saturday),
+];
+
+const changeToOneArray = allItems.flat(1); //flattens all arrays into one array of strings
+//console.log(merge3); //works!
+
+const uniqueItemsOnly = new Set(changeToOneArray);  //Set creates object which has only unique items
+
+let weeklyGroceriesToBuy = [...uniqueItemsOnly]; //Turns uniqueItemsOnly object to an array using ...spread
+
 
 /*
 Exercise 2:
   Loop through your list again, but now only collect the weekend items into the weekendGroceriesToBuy array.
 */
 // Gather weekend item names into this array
-let weekendGroceriesToBuy = [];
+let weekendGroceriesToBuy = weeklyMealPlan.saturday;  //stores array of saturday key's values
 
 /*
 Exercise 3:
@@ -44,6 +61,9 @@ Exercise 3:
     - and update the corresponding properties of numberOfItemsPerWeek object.
 */
 // Gather daily item counts into this object
+
+//use .length??
+
 let numberOfItemsPerWeek = {
   monday: 0,
   tuesday: 0,
@@ -53,6 +73,13 @@ let numberOfItemsPerWeek = {
   saturday: 0,
   sunday: 0,
 };
+
+//iterates through days in weeklyMealPlan
+for(let day in weeklyMealPlan) {
+ 
+  //takes the length of each weeklyMealPlan day's array, and puts updates numberOfItemsPerWeek with the results 
+  numberOfItemsPerWeek[day] = weeklyMealPlan[day].length;
+}
 
 /* ======= TESTS - DO NOT MODIFY ===== 
 - To run the tests for this exercise, run `npm test -- --testPathPattern 5-groceries.js`

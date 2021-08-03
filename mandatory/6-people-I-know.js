@@ -382,7 +382,56 @@ First, I want you to find all of my friends who are 35 or older.
 
 */
 
-let thirtyFiveOrOlder = [];
+//passes test, but technically shouldn't it return whole object, instead of just names?
+let thirtyFiveOrOlder = friends.filter((friend) => friend.age > 35);
+ 
+//This outputs correct values in array without jest
+// let thirtyFiveOrOlder = console.log(
+//     friends
+//       .filter((friend) => friend.age > 35)
+//       .map((friend) => friend.name.first)
+//   );
+
+//Mya's 
+// let friendsWhoAreColleaguesOfStacie = friends
+//   .filter((friend) =>
+//     friend.colleagues.some(
+//       (colleague) => colleague.name === "Stacie Villarreal"
+//     )
+//   )
+//   .map(
+//     (friendOfStacie) =>
+//       `${friendOfStacie.name.first} ${friendOfStacie.name.last}`
+//   );
+
+
+  //Mya's solution
+// 1. let thirtyFiveOrOlder = friends
+//   .filter((elem) => elem.age >= 35);
+// 2. let powerNetEmails = friends
+//   .filter((elem) => elem.company === "POWERNET")
+//   .map((elem) => elem.email);
+// 3. let friendsWhoAreColleaguesOfStacie = friends
+//   .filter((friend) =>
+//     friend.colleagues.some(
+//       (colleague) => colleague.name === "Stacie Villarreal"
+//     )
+//   )
+//   .map(
+//     (friendOfStacie) =>
+//       `${friendOfStacie.name.first} ${friendOfStacie.name.last}`
+//   );
+
+
+// 4. let colleaguesWhoCanMultitask = friends
+//   .map((friend) =>
+//     friend.colleagues.filter((colleague) =>
+//       colleague.skills.some((skill) => skill === "Multi-tasking")
+//     )
+//   )
+//   .flat()
+//   .map((elem) => elem.name); 
+
 
 /*
 3) Find the email address
@@ -391,7 +440,8 @@ Next, I want you to find all of my friends who work for "POWERNET" and then stor
 
 */
 
-let powerNetEmails = [];
+let powerNetEmails = friends.filter(friend => friend.company === 'POWERNET').map(friend => friend.email);
+
 
 /*
 
@@ -405,7 +455,17 @@ This time, I only want the full names ("<firstname> <lastname>") of my friends w
 
 */
 
-let friendsWhoAreColleaguesOfStacie = [];
+let friendsWhoAreColleaguesOfStacie = friends
+  .filter((friend) =>
+    friend.colleagues.some(
+      (colleague) => colleague.name === "Stacie Villarreal"
+    )
+  )
+  .map(
+    (friendOfStacie) =>
+      `${friendOfStacie.name.first} ${friendOfStacie.name.last}`
+  );;
+
 /*
 
 5) Find "Multi-tasking" colleagues
@@ -418,8 +478,22 @@ This time, I only want the full names of the people who can multitask
 
 */
 
-let colleaguesWhoCanMultitask = [];
+    //predicate function to filter multitasking colleagues
+    let canMultitask = (colleague) =>
+        colleague.skills.includes("Multi-tasking");
 
+    //maps through friends array, returning only multitasking colleague arrays   
+    let multitaskerArrays = friends
+    .map((friend) =>
+      friend.colleagues.filter(canMultitask)
+    );    
+     
+    //flattens array and loops through giving colleague names
+     let colleaguesWhoCanMultitask = multitaskerArrays
+       .flat()
+       .map((elem) => elem.name); 
+    
+  
 /* ======= TESTS - DO NOT MODIFY ===== 
 - To run the tests for this exercise, run `npm test -- --testPathPattern 6-people-I-know.js`
 - To run all exercises/tests in the mandatory folder, run `npm test`

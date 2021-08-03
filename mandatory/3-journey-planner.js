@@ -27,7 +27,20 @@
 */
 
 function journeyPlanner(locations, transportMode) {
-  
+
+  //empty array to push place names into
+  let placeArray = [];
+
+  //loop through locations array using for..in, and check if array keys 'placeName' includes transportMode string item
+  for (let placeName in locations) {
+    if (locations[placeName].includes(transportMode)) {
+    
+    //every key that fits condition is pushed inside empty array
+      placeArray.push(placeName);
+    }
+  }
+  //returns updated array with relevant places names
+  return placeArray;
 }
 
 /* ======= TESTS - DO NOT MODIFY ===== 
@@ -36,10 +49,10 @@ function journeyPlanner(locations, transportMode) {
 - (Reminder: You must have run `npm install` one time before this will work!)
 */
 const londonLocations = {
-    "Angel": ["tube", "bus"],
-    "London Bridge": ["tube", "river boat"],
-    "Tower Bridge": ["tube", "bus"],
-    "Greenwich": ["bus", "river boat"],
+  Angel: ["tube", "bus"],
+  "London Bridge": ["tube", "river boat"],
+  "Tower Bridge": ["tube", "bus"],
+  Greenwich: ["bus", "river boat"],
 };
 
 test("journeyPlanner function works - case 1", () => {
@@ -62,5 +75,5 @@ test("journeyPlanner function works - case 3", () => {
     "Angel",
     "London Bridge",
     "Tower Bridge",
-  ])
+  ]);
 });

@@ -55,7 +55,16 @@ let game = {
     // to start in.
     // Finish the function so that the currentRoom property is set to the room
     // object for the correct room.
-    //
+
+   //checks if roomName argument is either 'hall', 'classroom', or 'library'. Updates currentRoom to corresponding room by accessing rooms object.
+    if (roomName === "hall") {
+      game.currentRoom = rooms.hall;
+    } else if (roomName === "classroom") {
+      game.currentRoom = rooms.classroom;
+    } else if (roomName === "library") {
+      game.currentRoom = rooms.library;
+    }
+
     // Hint: the only valid rooms are "hall", "classroom" and "library".
   },
 
@@ -63,7 +72,23 @@ let game = {
     // This function is called with the direction that the player wants to move.
     // Finish the function so that the currentRoom property is updated with new
     // room in the direction that the player wants to move in.
-    //
+
+
+    //Only four different moves allowed based on the room's layout
+
+    //checks if in library and direction typed is 'north', updates currentRoom value to hall using property access to north method.
+    if (game.currentRoom === rooms.library && direction === "north") {
+      game.currentRoom = rooms.library.north(); //You are in the hall
+    } 
+    //same pattern as above condition
+    else if (game.currentRoom === rooms.hall && direction === "south") {
+      game.currentRoom = rooms.hall.south(); // You are in the library
+    } else if (game.currentRoom === rooms.hall && direction === "east") {
+      game.currentRoom = rooms.hall.east(); // You are in the classroom.
+    } else if (game.currentRoom === rooms.classroom && direction === "west") {
+      game.currentRoom = rooms.classroom.west();
+    }
+
     // Hint: the room objects have north/east/south/west methods which return
     // a new room object that is in the relevant direction.
   },

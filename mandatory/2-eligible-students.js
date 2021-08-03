@@ -20,8 +20,11 @@
  */
 
 function eligibleStudents(attendances) {
-   
+
+//  Filters attendances array for students with attendance value >= 8. Then iterates through filtered students to return respective name values.
+   return attendances.filter(student => student.attendance>= 8).map(student => student.name)
 }
+
 
 /* ======= TESTS - DO NOT MODIFY ===== 
 - To run the tests for this exercise, run `npm test -- --testPathPattern 2-eligible-students.js`
