@@ -57,9 +57,16 @@ let game = {
     // object for the correct room.
     //
     // Hint: the only valid rooms are "hall", "classroom" and "library".
+
+    if (["hall", "library", "classroom"].includes(roomName)) {
+      this.currentRoom = rooms[roomName];
+    }
   },
 
   move: function (direction) {
+    const newRoomFunction = this.currentRoom[direction];
+    this.currentRoom = newRoomFunction();
+
     // This function is called with the direction that the player wants to move.
     // Finish the function so that the currentRoom property is updated with new
     // room in the direction that the player wants to move in.
