@@ -25,16 +25,41 @@
   When you finish the exercise, think about how this solution is different to your last solution.
   What's better about each approach?
 */
+// <-------------------> for --- in loop method
+
 
 function journeyPlanner(locations, transportMode) {
-  
+  let nameOfLocation = [];
+  for (let locationName in locations) {
+    if (locations[locationName].includes(transportMode)){
+      nameOfLocation.push(locationName);
+    }
+
+  }
+  return nameOfLocation;
 }
+
+
+//console.log(journeyPlanner(londonLocations, "bus"));
+
+
+// <---------------------> (Other sample) Convert object into an array and loop through the array 
+// function journeyPlanner(locations, transportMode) {
+//   const locationNames = Object.keys(locations);
+//   locationNames.forEach(names => { 
+//     if (locations[names].includes(transportMode)){ 
+//       console.log(names);
+//     }
+//   })
+// }
+
 
 /* ======= TESTS - DO NOT MODIFY ===== 
 - To run the tests for this exercise, run `npm test -- --testPathPattern 3-journey-planner.js`
 - To run all exercises/tests in the mandatory folder, run `npm test`
 - (Reminder: You must have run `npm install` one time before this will work!)
 */
+
 const londonLocations = {
     "Angel": ["tube", "bus"],
     "London Bridge": ["tube", "river boat"],
