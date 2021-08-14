@@ -19,8 +19,10 @@
   - Returns an array containing only the names of the who have attended AT LEAST 8 classes
  */
 
+// I worked this with Kudrat
 function eligibleStudents(attendances) {
-   
+  let nameList = attendances.filter((object) => object.attendance >= 8).map((object) => object.name);
+  return nameList
 }
 
 /* ======= TESTS - DO NOT MODIFY ===== 

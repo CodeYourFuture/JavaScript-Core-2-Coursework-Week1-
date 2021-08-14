@@ -383,6 +383,10 @@ First, I want you to find all of my friends who are 35 or older.
 */
 
 let thirtyFiveOrOlder = [];
+thirtyFiveOrOlder = friends.filter((object) => object.age >= 35);
+thirtyFiveOrOlder.map((object) => object.name.first + " " + object.name.last)
+
+
 
 /*
 3) Find the email address
@@ -390,8 +394,8 @@ let thirtyFiveOrOlder = [];
 Next, I want you to find all of my friends who work for "POWERNET" and then store their emails in the array below
 
 */
-
-let powerNetEmails = [];
+let friendsWorkForPowerNet = friends.filter((object) => object.company === "POWERNET");
+let powerNetEmails = friendsWorkForPowerNet.map((object) => object.email);
 
 /*
 
@@ -405,7 +409,19 @@ This time, I only want the full names ("<firstname> <lastname>") of my friends w
 
 */
 
-let friendsWhoAreColleaguesOfStacie = [];
+function findStacie(friend){
+  /*for (let i = 0; i < object.colleagues.length; i++){
+    if (object.colleagues[i].name === "Stacie Villarreal"){
+      return true
+    }
+  }*/
+  // return friend.colleagues.map((colleague) => colleague.name).includes("Stacie Villarreal");
+  return friend.colleagues.some((colleague) => colleague.name === "Stacie Villarreal")
+}
+
+let friendsListOfStacie = friends.filter(findStacie)
+//console.log(friendsListOfStacie)
+let friendsWhoAreColleaguesOfStacie = friendsListOfStacie.map((object) => object.name.first + " " + object.name.last);
 /*
 
 5) Find "Multi-tasking" colleagues
@@ -418,7 +434,42 @@ This time, I only want the full names of the people who can multitask
 
 */
 
+
+/*function getMultiTaskingColleagues(friend){
+  let skillsList= friend.colleagues.filter((colleague) => colleague.skills.includes("Multi-tasking"));
+  //return 
+  console.log("skill list: ", skillsList)
+}
+let colleaguesWhoCanMultitask = [];*/
+
+
+/*let newVariable = friends.map(getMultiTaskingColleagues);
+newVariable.forEach((arr) => arr.forEach((colleague) => colleaguesWhoCanMultitask.push(colleague.name)));
+console.log(newVariable)*/
+
 let colleaguesWhoCanMultitask = [];
+friends.forEach((friend) => {
+  friend.colleagues.forEach((colleague) => {
+    if (colleague.skills.includes("Multi-tasking")){
+      colleaguesWhoCanMultitask.push(colleague.name)
+    }
+  })
+})
+
+
+
+
+
+/*for (let i = 0; i < friends.length; i++){
+  for (let j = 0; j < friends[i].colleagues.length; j++){
+    if (friends[i].colleagues[j].skills.includes("Multi-tasking")){
+      colleaguesWhoCanMultitask.push(friends[i].colleagues[j].name)
+    }
+  }
+  
+}
+console.log(colleaguesWhoCanMultitask)
+*/
 
 /* ======= TESTS - DO NOT MODIFY ===== 
 - To run the tests for this exercise, run `npm test -- --testPathPattern 6-people-I-know.js`

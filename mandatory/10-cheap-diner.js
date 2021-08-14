@@ -16,6 +16,7 @@ let setOne = [
   { name: "Chicken", price: 13.99 },
   { name: "Lobster", price: 10.99 }
 ]
+
 chosenMeal(setOne)
 
 Should give the answer "Lobster"
@@ -29,8 +30,26 @@ Should give the answer "Nothing :("
 
 **/
 
+
 function chooseMeal(mealArray) {
+  
+//In any selection of two or more meals, he will always buy the second-cheapest. 
+//If there is no choice, then he will buy the only meal given to him. 
+//If there are no meals available, then he will return null
+  if (mealArray.length === 0){
+    return "Nothing :(";
+  }else if (mealArray.length === 1){
+    return mealArray[0].name;
+  }else{
+    mealArray.sort(function (a,b){
+      return a.price - b.price;
+    });
+    return mealArray[1].name;
+  }
+    
+  
 }
+
 
 /* ======= TESTS - DO MODIFY (!!!) =====
 - To run the tests for this exercise, run `npm test -- --testPathPattern 10-cheap-diner.js`
@@ -53,6 +72,15 @@ test("Meal to select is first", () => {
     { name: "Captain D's", price: 13.99 },
   ])).toEqual("Moe's Southwest Grill");
 });
+
+/*test("Meal to select is first", () => {
+  expect(chooseMeal([
+    { name: "Moe's Southwest Grill", price: 10.99 },
+    { name: "Nab", price: 10.99},
+    { name: "Dunkin' Donuts", price: 8.99 },
+    { name: "Captain D's", price: 13.99 },
+  ])).toEqual("Nab");
+});*/
 
 test("Meal to select is also most expensive", () => {
   expect(chooseMeal([
